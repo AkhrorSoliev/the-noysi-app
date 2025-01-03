@@ -1,37 +1,16 @@
-import { useState, useEffect } from "react";
-
-function FormInput({ type, label, errorText }) {
-  const [value, setValue] = useState("");
-  const [hasError, setHasError] = useState(false);
-
-  useEffect(() => {
-    if (value.length > 3) {
-      setHasError(false);
-    }
-  }, [value]);
-
+function FormInput({ type, label, size, name, errorText }) {
   return (
     <label className="form-control w-full">
       <div className="label">
-        <span className="label-text">{label}</span>
+        <span className="label-text text-white">{label}</span>
       </div>
       <input
         type={type}
         placeholder="Type here"
-        className={`input input-bordered w-full ${
-          hasError ? "input-error" : ""
-        }`}
-        value={value}
-        onChange={(e) => {
-          setValue(e.target.value);
-          if (e.target.value.length <= 3) {
-            setHasError(true);
-          }
-        }}
+        className={`input input-bordered w-full ${size}`}
+        name={name}
+        required
       />
-      <div className="label">
-        <span className="label-text-alt">{hasError ? errorText : ""}</span>
-      </div>
     </label>
   );
 }
