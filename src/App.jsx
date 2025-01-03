@@ -1,4 +1,8 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
 
 // layouts
 import MainLayout from "./layout/MainLayout";
@@ -12,11 +16,12 @@ import Login from "./pages/Login";
 import { Dashboard } from "./pages";
 
 function App() {
+  const user = false;
   const routes = createBrowserRouter([
     {
       path: "/",
       element: (
-        <ProtectedRoutes user={true}>
+        <ProtectedRoutes user={user}>
           <MainLayout />
         </ProtectedRoutes>
       ),
@@ -29,11 +34,11 @@ function App() {
     },
     {
       path: "/signup",
-      element: <Signup />,
+      element: user ? <Navigate to="/" /> : <Signup />,
     },
     {
       path: "/login",
-      element: <Login />,
+      element: user ? <Navigate to="/" /> : <Login />,
     },
   ]);
 
