@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useGlobalContext } from "../hooks/useGlobalContext";
 import { MdOutlineExitToApp } from "react-icons/md";
-import { useSignout } from "../hooks/useSignOut";
+import { useSignOut } from "../hooks/useSignOut";
 import { IoMdMoon, IoMdSunny } from "react-icons/io";
 import { Link } from "react-router-dom";
 
@@ -11,7 +11,7 @@ const themeFromLocalStorage = () => {
 
 function MobileHeader() {
   const { user } = useGlobalContext();
-  const { signout } = useSignout();
+  const { signout } = useSignOut();
   const [isScrolled, setIsScrolled] = useState(false);
   const [theme, setTheme] = useState(themeFromLocalStorage());
 
