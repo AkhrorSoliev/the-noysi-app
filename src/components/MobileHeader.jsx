@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useGlobalContext } from "../hooks/useGlobalContext";
 import { MdOutlineExitToApp } from "react-icons/md";
-import { useSignout } from "../hooks/useSignout";
+import { useSignout } from "../hooks/useSignOut";
 import { IoMdMoon, IoMdSunny } from "react-icons/io";
 import { Link } from "react-router-dom";
 
