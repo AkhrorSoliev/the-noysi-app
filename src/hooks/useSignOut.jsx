@@ -2,8 +2,8 @@ import { signOut } from "firebase/auth";
 import { useGlobalContext } from "../hooks/useGlobalContext";
 import { checkerrorCode } from "../utils";
 import { auth } from "../firebase/firebaseConfig";
-import toast from "react-hot-toast";
 import { useFirestore } from "../hooks/useFirestore";
+import toast from "react-hot-toast";
 
 export function useSignout() {
   const { updateDocument } = useFirestore("users");
