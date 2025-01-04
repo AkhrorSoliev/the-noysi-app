@@ -121,7 +121,6 @@ export function useFirestore(collectionName) {
         type: "UPDATED_DOCUMENT",
         payload: updatedDocument,
       });
-      toast.success("Updated successfully");
     } catch (error) {
       console.log(error.message);
       dispatchIfNotCanceled({
