@@ -11,12 +11,20 @@ import MainLayout from "./layout/MainLayout";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 
 // pages
-import Signup from "./pages/Signup";
-import Login from "./pages/Login";
-import { Dashboard } from "./pages";
+import {
+  Create,
+  Dashboard,
+  Profile,
+  Signup,
+  Login,
+  OnlineUsers,
+} from "./pages";
+
+// context
+import { useGlobalContext } from "./hooks/useGlobalContext";
 
 function App() {
-  const user = false;
+  const { user, authIsReady } = useGlobalContext();
   const routes = createBrowserRouter([
     {
       path: "/",
@@ -30,6 +38,18 @@ function App() {
           path: "/",
           element: <Dashboard />,
         },
+        {
+          path: "/create",
+          element: <Create />,
+        },
+        {
+          path: "/profile",
+          element: <Profile />,
+        },
+        {
+          path: "/onlineUsers",
+          element: <OnlineUsers />,
+        },
       ],
     },
     {
@@ -42,7 +62,15 @@ function App() {
     },
   ]);
 
-  return <RouterProvider router={routes} />;
+  if (!authIsReady) {
+    return (
+      <section className="grid h-screen place-items-center">
+        <span className="loading"></span>
+      </section>
+    );
+  }
+
+  return <>{authIsReady && <RouterProvider router={routes} />}</>;
 }
 
 export default App;
