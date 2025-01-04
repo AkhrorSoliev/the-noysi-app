@@ -1,8 +1,11 @@
 import { Form, Link } from "react-router-dom";
 import { FormInput } from "../components";
 import LoginBg from "../assets/login-bg.jpg";
+import Logo from "../assets/noysi.svg";
+import { useAuthWithGoogle } from "../hooks/useAuthWithGoogle";
 
 function Login() {
+  const { authenticateWithGoogle, isPending } = useAuthWithGoogle();
   return (
     <section
       className="grid h-screen place-items-center bg-cover bg-center bg-no-repeat"
@@ -11,9 +14,12 @@ function Login() {
       }}
     >
       <div className="align-elements flex w-full max-w-96 flex-col gap-5">
-        <h2 className="text-center text-2xl font-semibold text-white md:text-4xl">
-          Login
-        </h2>
+        <div>
+          <img src={Logo} alt="site logo" className="mx-auto w-16" />
+          <h2 className="text-center text-2xl font-semibold text-white md:text-4xl">
+            Login
+          </h2>
+        </div>
         <Form method="post">
           <FormInput
             label="Email"
@@ -31,8 +37,13 @@ function Login() {
             <button className="btn btn-primary btn-sm grow md:btn-md">
               Login
             </button>
-            <button className="btn btn-secondary btn-sm grow md:btn-md">
-              Google
+            <button
+              type="button"
+              onClick={authenticateWithGoogle}
+              disabled={isPending}
+              className="btn btn-secondary btn-sm grow md:btn-md disabled:bg-slate-400"
+            >
+              {isPending ? "Loading..." : "Google"}
             </button>
           </div>
         </Form>
