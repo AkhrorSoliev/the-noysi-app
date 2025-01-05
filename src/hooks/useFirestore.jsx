@@ -134,7 +134,7 @@ export function useFirestore(collectionName) {
     dispatch({ type: "IS_PENDING" });
 
     const user = {
-      diplayName: userDocument.displayName,
+      displayName: userDocument.displayName,
       email: userDocument.email,
       emailVerified: userDocument.emailVerified,
       phoneNumber: userDocument.phoneNumber || false,
