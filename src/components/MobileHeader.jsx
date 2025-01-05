@@ -65,12 +65,12 @@ function MobileHeader() {
           <li>
             {theme == "light" && (
               <button onClick={changeTheme}>
-                Theme: night <IoMdMoon />
+                Theme: Dark <IoMdMoon />
               </button>
             )}
             {theme == "dracula" && (
               <button onClick={changeTheme}>
-                Theme: Sun <IoMdSunny />
+                Theme: Light <IoMdSunny />
               </button>
             )}
           </li>
