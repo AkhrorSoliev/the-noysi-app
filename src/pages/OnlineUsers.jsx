@@ -36,14 +36,14 @@ function OnlineUsers() {
     : [];
 
   return (
-    <section>
+    <section className="lg:hidden">
       <div className="align-elements">
         <h2 className="mb-4 text-center text-2xl font-semibold">
           Online Users
         </h2>
         {documents && (
           <motion.ul
-            className="container flex flex-col gap-2"
+            className="gird-cols-1 container grid gap-4 md:grid-cols-2 lg:hidden"
             variants={container}
             initial="hidden"
             animate="visible"
