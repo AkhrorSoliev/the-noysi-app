@@ -4,6 +4,7 @@ import { MdOutlineExitToApp } from "react-icons/md";
 import { useSignOut } from "../hooks/useSignOut";
 import { IoMdMoon, IoMdSunny } from "react-icons/io";
 import { Link } from "react-router-dom";
+import { useDocument } from "../hooks/useDocument";
 
 const themeFromLocalStorage = () => {
   return localStorage.getItem("theme") || "light";
@@ -11,6 +12,7 @@ const themeFromLocalStorage = () => {
 
 function MobileHeader() {
   const { user } = useGlobalContext();
+  const { document: _document } = useDocument("users", user.uid);
   const { signout } = useSignOut();
   const [isScrolled, setIsScrolled] = useState(false);
   const [theme, setTheme] = useState(themeFromLocalStorage());
@@ -52,7 +54,7 @@ function MobileHeader() {
           className="avatar btn btn-circle btn-ghost"
         >
           <div className="w-12 rounded-full ring-2 ring-primary ring-offset-2 ring-offset-base-100">
-            <img src={user.photoURL} alt={user.displayName} />
+            <img src={_document?.photoURL} alt={_document?.displayName} />
           </div>
         </div>
         <ul

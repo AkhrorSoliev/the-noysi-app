@@ -5,7 +5,7 @@ import {
   MdDoneOutline,
   MdOutlinePhotoCamera,
 } from "react-icons/md";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useUpdateProfile } from "../hooks/useUpdateProfile";
 
@@ -17,6 +17,7 @@ function Profile() {
   const [avatarImage, setAvatarImage] = useState(null);
   const coverInput = useRef();
   const avatarInput = useRef();
+
   const { updateUserProfile, isPending } = useUpdateProfile();
 
   const handleSubmit = (e) => {
@@ -172,8 +173,11 @@ function Profile() {
           </div>
         </div>
         <div className="flex justify-center">
-          <button className="btn btn-primary mx-auto w-full max-w-96">
-            Save
+          <button
+            disabled={isPending}
+            className={`btn btn-primary mx-auto w-full max-w-96 ${isPending && "bg-slate-500"}`}
+          >
+            {isPending ? "Loading..." : "Save"}
           </button>
         </div>
       </form>

@@ -50,7 +50,6 @@ export function useUpdateProfile() {
       }
       toast.success("Profile updated successfully");
     }
-
     setIsPending(false);
   };
 
