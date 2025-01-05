@@ -41,7 +41,7 @@ function MobileHeader() {
 
   return (
     <header
-      className={`fixed left-1/2 top-0 flex w-full -translate-x-1/2 items-center justify-between px-5 py-4 transition duration-300 md:hidden ${
+      className={`fixed left-1/2 top-0 z-50 flex w-full -translate-x-1/2 items-center justify-between px-5 py-4 transition duration-300 md:hidden ${
         isScrolled ? "h-[80px] bg-base-100 shadow-md" : "bg-transparent"
       }`}
     >
