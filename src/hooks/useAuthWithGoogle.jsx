@@ -5,12 +5,14 @@ import { checkerrorCode } from "../utils";
 import toast from "react-hot-toast";
 import { useGlobalContext } from "../hooks/useGlobalContext";
 import { useFirestore } from "./useFirestore";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase/firebaseConfig";
 
 export function useAuthWithGoogle() {
   const { dispatch } = useGlobalContext();
   const [isPending, setIsPending] = useState(false);
   const [isCancelled, setIsCancelled] = useState(false);
-  const { addUserDocument, state } = useFirestore("users");
+  const { addUserDocument, updateDocument, state } = useFirestore("users");
 
   useEffect(() => {
     return () => setIsCancelled(true);
@@ -23,7 +25,15 @@ export function useAuthWithGoogle() {
       const result = await signInWithPopup(auth, provider);
 
       if (result) {
-        await addUserDocument(result.user);
+        const user = await getDoc(doc(db, "users", result.user.uid));
+
+        if (user.exists()) {
+          await updateDocument(result.user.uid, {
+            online: true,
+          });
+        } else {
+          await addUserDocument(result.user);
+        }
       }
 
       if (!isCancelled) {
