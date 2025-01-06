@@ -119,3 +119,28 @@
     @apply mx-auto max-w-6xl max-w-full px-4;
   }
 }
+
+.react-select__value-container {
+  background-color: #282a36;
+  color: #fff;
+}
+
+.react-select__indicators {
+  color: #fff;
+  background-color: #282a36;
+}
+
+.react-select__menu {
+}
+
+.react-select__menu-list {
+}
+
+.react-select__single-value {
+  color: #fff !important;
+}
+
+.react-select__option {
+  background-color: red;
+  color: #000 !important;
+}
