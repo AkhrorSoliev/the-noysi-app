@@ -83,7 +83,6 @@ body.light {
 
 .react-select__value-container {
   background-color: var(--color-dark);
-  color: red;
 }
 
 .react-select__indicators {
