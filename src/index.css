@@ -53,6 +53,22 @@
   .align-elements {
     @apply mx-auto max-w-6xl max-w-full px-4;
   }
+
+  .create-btn {
+    @apply md:col-start-1 md:col-end-3 md:row-start-5 md:flex md:w-full md:justify-center;
+  }
+
+  .create-form {
+    @apply grid grid-cols-1 gap-3 md:grid-cols-2 md:grid-rows-6 md:items-center;
+  }
+
+  #root {
+    @apply lg:flex;
+  }
+
+  img {
+    @apply object-cover;
+  }
 }
 
 :root {

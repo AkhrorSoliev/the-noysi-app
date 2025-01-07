@@ -11,7 +11,7 @@ export function useDocument(collectionName, id) {
     });
 
     return () => unsub();
-  }, [collectionName]);
+  }, [collectionName, id]);
 
   return { document };
 }
