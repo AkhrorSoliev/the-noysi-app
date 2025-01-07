@@ -24,6 +24,7 @@ function MobileHeader() {
   };
 
   useEffect(() => {
+    document.body.setAttribute("class", theme);
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
   }, [theme]);
