@@ -5,7 +5,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Figtree", "sans-serif"],
+        sans: ["Manrope", "sans-serif"],
       },
     },
   },
