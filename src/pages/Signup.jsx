@@ -9,7 +9,7 @@ function Signup() {
 
   return (
     <section
-      className="grid h-screen place-items-center bg-cover bg-center bg-no-repeat"
+      className="grid h-screen w-full place-items-center bg-cover bg-center bg-no-repeat"
       style={{
         backgroundImage: `linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url(${SignupBg})`,
       }}

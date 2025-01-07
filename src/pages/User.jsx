@@ -5,7 +5,6 @@ import { MdOutlineWarning, MdDoneOutline } from "react-icons/md";
 function User() {
   const { id } = useParams();
   const { document } = useDocument("users", id);
-  console.log(document);
 
   if (!document) {
     return <div className="loading">Loading...</div>;

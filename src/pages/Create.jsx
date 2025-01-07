@@ -99,8 +99,8 @@ function Create() {
         <h1 className="mb-5 text-center text-3xl font-semibold">
           Create a new Project
         </h1>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-          <label className="form-control w-full">
+        <form onSubmit={handleSubmit} className="create-form">
+          <label className="form-control w-full md:col-span-1">
             <div className="label">
               <span className="label-text">Title:*</span>
             </div>
@@ -111,7 +111,8 @@ function Create() {
               className="input input-bordered w-full"
             />
           </label>
-          <label className="form-control">
+          {/* Description */}
+          <label className="form-control md:col-span-2 md:row-start-3 md:row-end-4">
             <div className="label">
               <span className="label-text">Description:*</span>
             </div>
@@ -121,7 +122,8 @@ function Create() {
               placeholder="Type here"
             ></textarea>
           </label>
-          <label className="form-control w-full">
+          {/* Set  Due to */}
+          <label className="form-control w-full md:col-start-2 md:col-end-3 md:row-start-1">
             <div className="label">
               <span className="label-text">Set Due to:*</span>
             </div>
@@ -132,6 +134,7 @@ function Create() {
               className="input input-bordered w-full"
             />
           </label>
+          {/* Category */}
           <label className="form-control w-full">
             <div className="label">
               <span className="label-text">Category:*</span>
@@ -144,6 +147,7 @@ function Create() {
               classNamePrefix="react-select"
             />
           </label>
+          {/* Assigned Users */}
           <label className="form-control w-full">
             <div className="label">
               <span className="label-text">Select Users:*</span>
@@ -157,8 +161,9 @@ function Create() {
               isMulti
             />
           </label>
-          <div className="form-control">
-            <label className="label cursor-pointer">
+          {/* checkbox */}
+          <div className="form-control md:col-start-1 md:col-end-2 md:items-center">
+            <label className="label cursor-pointer md:justify-start md:gap-4">
               <span className="label-text">
                 Only assign users write comments:
               </span>
@@ -173,7 +178,9 @@ function Create() {
                 className="checkbox"
               />
             </label>
-            <label className="label cursor-pointer">
+          </div>
+          <div className="form-control md:col-start-2 md:col-end-3 md:items-center">
+            <label className="label cursor-pointer md:justify-start md:gap-4">
               <span className="label-text">
                 Read comments on this project to all users:
               </span>
@@ -185,7 +192,11 @@ function Create() {
               />
             </label>
           </div>
-          <button className="btn btn-primary">Submit</button>
+          <div className="create-btn">
+            <button className="btn btn-primary w-full md:max-w-96">
+              Submit
+            </button>
+          </div>
         </form>
       </div>
     </section>

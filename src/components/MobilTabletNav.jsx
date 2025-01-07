@@ -8,7 +8,7 @@ import {
 
 function MobilTabletNav() {
   return (
-    <nav className="fixed bottom-5 left-1/2 w-full max-w-[95%] -translate-x-1/2 rounded-3xl bg-base-100 px-4 shadow-md md:hidden">
+    <nav className="fixed bottom-5 left-1/2 w-full max-w-[95%] -translate-x-1/2 rounded-3xl bg-base-100 px-4 shadow-md lg:hidden">
       <div className="menu menu-horizontal w-full justify-between">
         <li>
           <NavLink to="/">
