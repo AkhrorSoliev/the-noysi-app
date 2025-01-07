@@ -120,27 +120,39 @@
   }
 }
 
+:root {
+  --color-dark: #282a36;
+  --color-wheite: #fff;
+}
+
+body.light {
+  --color-dark: #fff;
+  --color-wheite: #282a36;
+}
+
 .react-select__value-container {
-  background-color: #282a36;
-  color: #fff;
+  background-color: var(--color-dark);
+  color: red;
 }
 
 .react-select__indicators {
   color: #fff;
-  background-color: #282a36;
-}
-
-.react-select__menu {
-}
-
-.react-select__menu-list {
+  background-color: var(--color-dark);
 }
 
 .react-select__single-value {
-  color: #fff !important;
+  color: var(--color-wheite);
 }
 
 .react-select__option {
   background-color: red;
-  color: #000 !important;
+  color: var(--color-dark);
+}
+
+body.dracula .react-select__option {
+  color: var(--color-dark);
+}
+
+body.dracula .react-select__single-value {
+  color: var(--color-wheite);
 }
