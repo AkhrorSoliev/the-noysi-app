@@ -96,7 +96,7 @@ function Create() {
   return (
     <section>
       <div className="align-elements">
-        <h1 className="mb-5 text-center text-3xl font-semibold">
+        <h1 className="mb-5 text-center text-xl font-semibold md:text-2xl lg:text-3xl">
           Create a new Project
         </h1>
         <form onSubmit={handleSubmit} className="create-form">
@@ -108,7 +108,7 @@ function Create() {
               onChange={(e) => setTitle(e.target.value)}
               type="text"
               placeholder="Type here"
-              className="input input-bordered w-full"
+              className="input input-sm input-bordered w-full md:input-md lg:input-lg"
             />
           </label>
           {/* Description */}
@@ -118,7 +118,7 @@ function Create() {
             </div>
             <textarea
               onChange={(e) => setDescription(e.target.value)}
-              className="textarea textarea-bordered"
+              className="textarea textarea-bordered md:textarea-md lg:textarea-lg"
               placeholder="Type here"
             ></textarea>
           </label>
@@ -131,7 +131,7 @@ function Create() {
               onChange={(e) => setDueDate(e.target.value)}
               type="date"
               placeholder="Type here"
-              className="input input-bordered w-full"
+              className="input input-sm input-bordered w-full md:input-md lg:input-lg"
             />
           </label>
           {/* Category */}
@@ -193,7 +193,7 @@ function Create() {
             </label>
           </div>
           <div className="create-btn">
-            <button className="btn btn-primary w-full md:max-w-96">
+            <button className="btn btn-primary btn-sm w-full md:btn-md lg:btn-lg md:max-w-96">
               Submit
             </button>
           </div>
