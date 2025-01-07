@@ -1,6 +1,11 @@
 import Select from "react-select";
 import { useCollection } from "../hooks/useCollection";
 import { useEffect, useState } from "react";
+import { useGlobalContext } from "../hooks/useGlobalContext";
+import { Timestamp } from "firebase/firestore";
+import toast from "react-hot-toast";
+import { useFirestore } from "../hooks/useFirestore";
+import { useNavigate } from "react-router-dom";
 
 const categories = [
   { value: "frontend", label: "Frontend" },
@@ -11,14 +16,21 @@ const categories = [
 ];
 
 function Create() {
+  const navigate = useNavigate();
+  const { addDocument, state } = useFirestore("projects");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [category, setCategory] = useState(null);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [commentsAccessOnlyAssignedUsers, setCommentsAccessOnlyAssignedUsers] =
+    useState(false);
+  const [onlyReadComments, setOnlyReadComments] = useState(false);
 
+  const { user } = useGlobalContext();
   const { documents } = useCollection("users");
   const [users, setUsers] = useState([]);
+
   const handleUserSelect = (option) => {
     setSelectedUser(option.map((user) => user.value));
   };
@@ -37,18 +49,48 @@ function Create() {
     setUsers(userOptions);
   }, [documents]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (
+      !title.trim() ||
+      !description.trim() ||
+      !dueDate.trim() ||
+      !category ||
+      !selectedUser
+    ) {
+      toast.error("Please fill in all fields");
+      return;
+    }
+
+    const assignedUsersList =
+      selectedUser &&
+      selectedUser.map((user) => ({
+        displayName: user.displayName,
+        photoURL: user.photoURL,
+        id: user.id,
+      }));
+
+    const createdBy = {
+      id: user.uid,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+    };
 
     const project = {
       title,
       description,
-      dueDate,
+      dueDate: Timestamp.fromDate(new Date(dueDate)),
       category,
-      selectedUser,
+      createdBy,
+      assignedUsersList,
+      comments: [],
+      commentsAccessOnlyAssignedUsers,
+      onlyReadComments,
     };
 
-    console.log(project);
+    await addDocument(project);
+    navigate("/");
   };
 
   return (
@@ -60,7 +102,7 @@ function Create() {
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           <label className="form-control w-full">
             <div className="label">
-              <span className="label-text">Title:</span>
+              <span className="label-text">Title:*</span>
             </div>
             <input
               onChange={(e) => setTitle(e.target.value)}
@@ -71,7 +113,7 @@ function Create() {
           </label>
           <label className="form-control">
             <div className="label">
-              <span className="label-text">Description</span>
+              <span className="label-text">Description:*</span>
             </div>
             <textarea
               onChange={(e) => setDescription(e.target.value)}
@@ -81,7 +123,7 @@ function Create() {
           </label>
           <label className="form-control w-full">
             <div className="label">
-              <span className="label-text">Set Due to:</span>
+              <span className="label-text">Set Due to:*</span>
             </div>
             <input
               onChange={(e) => setDueDate(e.target.value)}
@@ -92,7 +134,7 @@ function Create() {
           </label>
           <label className="form-control w-full">
             <div className="label">
-              <span className="label-text">Category:</span>
+              <span className="label-text">Category:*</span>
             </div>
             <Select
               onChange={hanldeCategorySelect}
@@ -104,7 +146,7 @@ function Create() {
           </label>
           <label className="form-control w-full">
             <div className="label">
-              <span className="label-text">Select Users:</span>
+              <span className="label-text">Select Users:*</span>
             </div>
             <Select
               onChange={(option) => handleUserSelect(option)}
@@ -115,7 +157,35 @@ function Create() {
               isMulti
             />
           </label>
-          <button>Submit</button>
+          <div className="form-control">
+            <label className="label cursor-pointer">
+              <span className="label-text">
+                Only assign users write comments:
+              </span>
+              <input
+                onChange={() =>
+                  setCommentsAccessOnlyAssignedUsers(
+                    !commentsAccessOnlyAssignedUsers,
+                  )
+                }
+                checked={commentsAccessOnlyAssignedUsers}
+                type="checkbox"
+                className="checkbox"
+              />
+            </label>
+            <label className="label cursor-pointer">
+              <span className="label-text">
+                Read comments on this project to all users:
+              </span>
+              <input
+                onChange={() => setOnlyReadComments(!onlyReadComments)}
+                checked={onlyReadComments}
+                type="checkbox"
+                className="checkbox"
+              />
+            </label>
+          </div>
+          <button className="btn btn-primary">Submit</button>
         </form>
       </div>
     </section>
