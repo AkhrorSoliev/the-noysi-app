@@ -6,12 +6,15 @@ import {
 } from "react-icons/md";
 import { useGlobalContext } from "../hooks/useGlobalContext";
 import { NavLink } from "react-router-dom";
+import { useDocument } from "../hooks/useDocument";
 
 function Sidebar() {
   const { user } = useGlobalContext();
+  const { document } = useDocument("users", user.uid);
+
   return (
     <div className="hidden w-64 shrink-0 bg-primary-content bg-opacity-50 p-2 pr-0 pt-10 dark:bg-neutral-content lg:block">
-      <Avatar users={user} />
+      <Avatar user={document} />
       <ul className="menu flex flex-col gap-4 rounded-r-none p-0 pl-8">
         <li>
           <NavLink
