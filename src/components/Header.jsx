@@ -6,6 +6,7 @@ import { IoMdMoon, IoMdSunny } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { useDocument } from "../hooks/useDocument";
 import Logo from "../assets/noysi.svg";
+import { useThemeToggler } from "../hooks/useThemeToggler";
 
 const themeFromLocalStorage = () => {
   return localStorage.getItem("theme") || "light";
@@ -16,19 +17,7 @@ function Header() {
   const { document: _document } = useDocument("users", user.uid);
   const { signout } = useSignOut();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [theme, setTheme] = useState(themeFromLocalStorage());
-
-  const changeTheme = () => {
-    setTheme((prev) => {
-      return prev === "light" ? "dracula" : "light";
-    });
-  };
-
-  useEffect(() => {
-    document.body.setAttribute("class", theme);
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
-  }, [theme]);
+  const { changeTheme, theme } = useThemeToggler();
 
   useEffect(() => {
     const handleScroll = () => {
