@@ -69,7 +69,7 @@ function App() {
 
   if (!authIsReady) {
     return (
-      <section className="grid h-screen place-items-center">
+      <section className="grid h-screen w-full place-items-center">
         <span className="loading"></span>
       </section>
     );
