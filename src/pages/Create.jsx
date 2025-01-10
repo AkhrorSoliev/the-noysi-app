@@ -108,7 +108,7 @@ function Create() {
               onChange={(e) => setTitle(e.target.value)}
               type="text"
               placeholder="Type here"
-              className="input input-sm input-bordered w-full md:input-md lg:input-lg"
+              className="input input-sm input-bordered w-full md:input-md"
             />
           </label>
           {/* Description */}
@@ -118,7 +118,7 @@ function Create() {
             </div>
             <textarea
               onChange={(e) => setDescription(e.target.value)}
-              className="textarea textarea-bordered md:textarea-md lg:textarea-lg"
+              className="textarea textarea-bordered md:textarea-md"
               placeholder="Type here"
             ></textarea>
           </label>
@@ -131,7 +131,7 @@ function Create() {
               onChange={(e) => setDueDate(e.target.value)}
               type="date"
               placeholder="Type here"
-              className="input input-sm input-bordered w-full md:input-md lg:input-lg"
+              className="input input-sm input-bordered w-full md:input-md"
             />
           </label>
           {/* Category */}

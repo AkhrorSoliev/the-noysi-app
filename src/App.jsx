@@ -19,6 +19,7 @@ import {
   Login,
   OnlineUsers,
   User,
+  Project,
 } from "./pages";
 
 // context
@@ -54,6 +55,10 @@ function App() {
         {
           path: "/user/:id",
           element: <User />,
+        },
+        {
+          path: "/project/:id",
+          element: <Project />,
         },
       ],
     },
