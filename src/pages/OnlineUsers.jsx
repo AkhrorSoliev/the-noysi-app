@@ -60,7 +60,7 @@ function OnlineUsers() {
                       alt=""
                       className="h-12 w-12 rounded-full"
                     />
-                    <span className="mr-auto block">
+                    <span className="mr-auto">
                       {user.displayName} {user.id == _user.uid && "(you)"}
                     </span>
                     <div className="flex items-center gap-1">
