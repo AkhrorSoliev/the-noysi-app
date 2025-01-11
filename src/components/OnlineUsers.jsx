@@ -49,16 +49,16 @@ function OnlineUsers() {
             return (
               <motion.li key={user.id} className="item" variants={item}>
                 <Link
-                  className="text-md btn btn-ghost btn-outline btn-sm btn-block h-auto justify-start py-1"
+                  className="text-md btn btn-ghost btn-outline btn-sm btn-block h-auto justify-start px-1 py-2"
                   to={`/user/${user.id}`}
                 >
                   <img
                     src={user.photoURL}
                     alt=""
-                    className="h-12 w-12 rounded-full"
+                    className="h-10 w-10 rounded-full"
                   />
-                  <span className="mr-auto line-clamp-1 block">
-                    {user.displayName}... {user.id == _user.uid && "(you)"}
+                  <span className="mr-auto block">
+                    {user.displayName} {user.id == _user.uid && "(you)"}
                   </span>
                   <div className="flex items-center gap-1">
                     <span

@@ -5,3 +5,5 @@ export { default as OnlineUsers } from "./OnlineUsers";
 export { default as Sidebar } from "./Sidebar";
 export { default as ProjectList } from "./ProjectList";
 export { default as ProjectFilter } from "./ProjectFilter";
+export { default as ProjectContent } from "./ProjectContent";
+export { default as ProjectChat } from "./ProjectChat";

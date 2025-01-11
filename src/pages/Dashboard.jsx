@@ -5,7 +5,6 @@ import { IoMdAdd } from "react-icons/io";
 
 function Dashboard() {
   const { documents } = useCollection("projects");
-  console.log(documents);
 
   if (!documents) {
     return (
