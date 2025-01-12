@@ -1,5 +1,5 @@
 import { IoSend } from "react-icons/io5";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useGlobalContext } from "../hooks/useGlobalContext";
 import { Timestamp } from "firebase/firestore";
 import { useFirestore } from "../hooks/useFirestore";
@@ -9,6 +9,7 @@ function ProjectChat({ id, comments }) {
   const { updateDocument } = useFirestore("projects");
   const [errorArea, setErrorArea] = useState(false);
   const textareaRef = useRef();
+  const messagesEndRef = useRef(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,6 +42,14 @@ function ProjectChat({ id, comments }) {
   const handleBlur = () => {
     dispatch({ type: "MESSAGE_INPUT_FOCUS", payload: false });
   };
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [comments]);
 
   return (
     <div className="md:w-1/2">
@@ -77,6 +86,7 @@ function ProjectChat({ id, comments }) {
         ) : (
           <p className="text-center">No comments yet</p>
         )}
+        <div ref={messagesEndRef}></div>
       </div>
       <form onSubmit={handleSubmit}>
         <label className="form-control mb-5">
