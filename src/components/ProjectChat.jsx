@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useGlobalContext } from "../hooks/useGlobalContext";
 import { Timestamp } from "firebase/firestore";
 import { useFirestore } from "../hooks/useFirestore";
+import { v4 as uuidv4 } from "uuid";
 
 function ProjectChat({ id, comments }) {
   const { dispatch, user } = useGlobalContext();
@@ -26,6 +27,7 @@ function ProjectChat({ id, comments }) {
         photoURL: user.photoURL,
         uid: user.uid,
       },
+      id: uuidv4(),
     };
 
     await updateDocument(id, {
@@ -47,6 +49,13 @@ function ProjectChat({ id, comments }) {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit(e);
+    }
+  };
+
   useEffect(() => {
     scrollToBottom();
   }, [comments]);
@@ -60,20 +69,22 @@ function ProjectChat({ id, comments }) {
         {comments.length ? (
           <>
             {comments.map((comment) => {
+              const { createdBy, content, id } = comment;
               return (
                 <div
+                  key={id}
                   className={`chat ${user.uid === comment.createdBy.uid ? "chat-end" : "chat-start"}`}
                 >
                   <div className="avatar chat-image">
                     <div className="w-10 rounded-full">
                       <img
-                        src={comment.createdBy.photoURL}
-                        alt={`${comment.createdBy.displayName} avatar`}
+                        src={createdBy.photoURL}
+                        alt={`${createdBy.displayName} avatar`}
                       />
                     </div>
                   </div>
                   <div className="chat-header">
-                    {comment.createdBy.displayName}
+                    {createdBy.displayName}
                     <time className="ml-1 text-xs italic opacity-50">
                       {comment.createdAt.toDate().toLocaleString()}
                     </time>
@@ -98,6 +109,7 @@ function ProjectChat({ id, comments }) {
             className={`textarea textarea-bordered h-24 leading-normal ${
               errorArea ? "textarea-error" : ""
             }`}
+            onKeyDown={handleKeyDown}
             placeholder="Type here"
             onFocus={handleFocus}
             onBlur={handleBlur}
