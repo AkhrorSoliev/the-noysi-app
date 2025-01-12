@@ -1,8 +1,20 @@
 import { IoSend } from "react-icons/io5";
+import { useRef } from "react";
+import { useGlobalContext } from "../hooks/useGlobalContext";
 
 function ProjectChat({ comments }) {
+  const { dispatch } = useGlobalContext();
   const handleSubmit = (e) => {
     e.preventDefault();
+  };
+  const textareaRef = useRef();
+
+  const handleFocus = () => {
+    dispatch({ type: "MESSAGE_INPUT_FOCUS", payload: true });
+  };
+
+  const handleBlur = () => {
+    dispatch({ type: "MESSAGE_INPUT_FOCUS", payload: false });
   };
 
   return (
@@ -26,201 +38,7 @@ function ProjectChat({ comments }) {
           </div>
           <div className="chat-bubble">You were the Chosen One!</div>
         </div>
-        <div className="chat chat-start">
-          <div className="avatar chat-image">
-            <div className="w-10 rounded-full">
-              <img
-                alt="Tailwind CSS chat bubble component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-              />
-            </div>
-          </div>
-          <div className="chat-header">
-            Obi-Wan Kenobi
-            <time className="text-xs opacity-50">12:45</time>
-          </div>
-          <div className="chat-bubble">You were the Chosen One!</div>
-        </div>
-        <div className="chat chat-start">
-          <div className="avatar chat-image">
-            <div className="w-10 rounded-full">
-              <img
-                alt="Tailwind CSS chat bubble component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-              />
-            </div>
-          </div>
-          <div className="chat-header">
-            Obi-Wan Kenobi
-            <time className="text-xs opacity-50">12:45</time>
-          </div>
-          <div className="chat-bubble">You were the Chosen One!</div>
-        </div>
-        <div className="chat chat-start">
-          <div className="avatar chat-image">
-            <div className="w-10 rounded-full">
-              <img
-                alt="Tailwind CSS chat bubble component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-              />
-            </div>
-          </div>
-          <div className="chat-header">
-            Obi-Wan Kenobi
-            <time className="text-xs opacity-50">12:45</time>
-          </div>
-          <div className="chat-bubble">You were the Chosen One!</div>
-        </div>
-        <div className="chat chat-start">
-          <div className="avatar chat-image">
-            <div className="w-10 rounded-full">
-              <img
-                alt="Tailwind CSS chat bubble component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-              />
-            </div>
-          </div>
-          <div className="chat-header">
-            Obi-Wan Kenobi
-            <time className="text-xs opacity-50">12:45</time>
-          </div>
-          <div className="chat-bubble">You were the Chosen One!</div>
-        </div>
-        <div className="chat chat-start">
-          <div className="avatar chat-image">
-            <div className="w-10 rounded-full">
-              <img
-                alt="Tailwind CSS chat bubble component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-              />
-            </div>
-          </div>
-          <div className="chat-header">
-            Obi-Wan Kenobi
-            <time className="text-xs opacity-50">12:45</time>
-          </div>
-          <div className="chat-bubble">You were the Chosen One!</div>
-        </div>
-        <div className="chat chat-start">
-          <div className="avatar chat-image">
-            <div className="w-10 rounded-full">
-              <img
-                alt="Tailwind CSS chat bubble component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-              />
-            </div>
-          </div>
-          <div className="chat-header">
-            Obi-Wan Kenobi
-            <time className="text-xs opacity-50">12:45</time>
-          </div>
-          <div className="chat-bubble">You were the Chosen One!</div>
-        </div>
-        <div className="chat chat-start">
-          <div className="avatar chat-image">
-            <div className="w-10 rounded-full">
-              <img
-                alt="Tailwind CSS chat bubble component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-              />
-            </div>
-          </div>
-          <div className="chat-header">
-            Obi-Wan Kenobi
-            <time className="text-xs opacity-50">12:45</time>
-          </div>
-          <div className="chat-bubble">You were the Chosen One!</div>
-        </div>
-        <div className="chat chat-start">
-          <div className="avatar chat-image">
-            <div className="w-10 rounded-full">
-              <img
-                alt="Tailwind CSS chat bubble component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-              />
-            </div>
-          </div>
-          <div className="chat-header">
-            Obi-Wan Kenobi
-            <time className="text-xs opacity-50">12:45</time>
-          </div>
-          <div className="chat-bubble">You were the Chosen One!</div>
-        </div>
-        <div className="chat chat-start">
-          <div className="avatar chat-image">
-            <div className="w-10 rounded-full">
-              <img
-                alt="Tailwind CSS chat bubble component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-              />
-            </div>
-          </div>
-          <div className="chat-header">
-            Obi-Wan Kenobi
-            <time className="text-xs opacity-50">12:45</time>
-          </div>
-          <div className="chat-bubble">You were the Chosen One!</div>
-        </div>
-        <div className="chat chat-start">
-          <div className="avatar chat-image">
-            <div className="w-10 rounded-full">
-              <img
-                alt="Tailwind CSS chat bubble component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-              />
-            </div>
-          </div>
-          <div className="chat-header">
-            Obi-Wan Kenobi
-            <time className="text-xs opacity-50">12:45</time>
-          </div>
-          <div className="chat-bubble">You were the Chosen One!</div>
-        </div>
-        <div className="chat chat-start">
-          <div className="avatar chat-image">
-            <div className="w-10 rounded-full">
-              <img
-                alt="Tailwind CSS chat bubble component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-              />
-            </div>
-          </div>
-          <div className="chat-header">
-            Obi-Wan Kenobi
-            <time className="text-xs opacity-50">12:45</time>
-          </div>
-          <div className="chat-bubble">You were the Chosen One!</div>
-        </div>
-        <div className="chat chat-start">
-          <div className="avatar chat-image">
-            <div className="w-10 rounded-full">
-              <img
-                alt="Tailwind CSS chat bubble component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-              />
-            </div>
-          </div>
-          <div className="chat-header">
-            Obi-Wan Kenobi
-            <time className="text-xs opacity-50">12:45</time>
-          </div>
-          <div className="chat-bubble">You were the Chosen One!</div>
-        </div>
-        <div className="chat chat-start">
-          <div className="avatar chat-image">
-            <div className="w-10 rounded-full">
-              <img
-                alt="Tailwind CSS chat bubble component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-              />
-            </div>
-          </div>
-          <div className="chat-header">
-            Obi-Wan Kenobi
-            <time className="text-xs opacity-50">12:45</time>
-          </div>
-          <div className="chat-bubble">You were the Chosen One!</div>
-        </div>
+        {/* Other chat messages omitted for brevity */}
       </div>
       <form onSubmit={handleSubmit}>
         <label className="form-control mb-5">
@@ -228,8 +46,11 @@ function ProjectChat({ comments }) {
             <span className="label-text">Message:</span>
           </div>
           <textarea
+            ref={textareaRef}
             className="textarea textarea-bordered h-24 leading-normal"
             placeholder="Type here"
+            onFocus={handleFocus}
+            onBlur={handleBlur}
           ></textarea>
         </label>
         <div className="flex justify-end">

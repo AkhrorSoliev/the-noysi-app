@@ -5,17 +5,18 @@ function ProjectContent({ project }) {
   const { id, title, description, createdBy, dueDate } = project;
   return (
     <div className="md:w-1/2">
+      <h3 className="mb-5 text-center text-2xl font-medium md:hidden">
+        Project
+      </h3>
       <div className="mb-5 rounded bg-base-300 p-4">
         <h3 className="mb-2 text-2xl font-bold md:text-3xl">{title}</h3>
         <p className="mb-1 flex items-center gap-1 opacity-80">
           Creator:
           <span className="flex items-center gap-2">
             <img
-              className="rounded-full"
+              className="h-7 w-7 rounded-full object-cover"
               src={createdBy.photoURL}
               alt=""
-              width={30}
-              height={30}
             />
             <b>{createdBy.displayName}</b>
           </span>
