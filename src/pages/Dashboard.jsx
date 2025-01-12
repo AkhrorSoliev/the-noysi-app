@@ -2,9 +2,42 @@ import { useCollection } from "../hooks/useCollection";
 import { ProjectList, ProjectFilter } from "../components";
 import { Link } from "react-router-dom";
 import { IoMdAdd } from "react-icons/io";
+import { useState } from "react";
+import { useGlobalContext } from "../hooks/useGlobalContext";
 
 function Dashboard() {
+  const { user } = useGlobalContext();
   const { documents } = useCollection("projects");
+  const [filter, setFilter] = useState("all");
+
+  const changeFilter = (newFilter) => {
+    setFilter(newFilter);
+  };
+
+  const projects = documents
+    ? documents.filter((doc) => {
+        switch (filter) {
+          case "all":
+            return true;
+          case "mine":
+            let assignedToMe = false;
+            doc.assignedUsersList.forEach((u) => {
+              if (user.uid === u.id) {
+                assignedToMe = true;
+              }
+            });
+            return assignedToMe;
+          case "frontend":
+          case "backend":
+          case "design":
+          case "marketing":
+          case "others":
+            return doc.category === filter;
+          default:
+            return true;
+        }
+      })
+    : null;
 
   if (!documents) {
     return (
@@ -21,9 +54,9 @@ function Dashboard() {
             Dashboard
           </h1>
         )}
-        {documents.length ? <ProjectFilter /> : ""}
+        {documents.length ? <ProjectFilter changeFilter={changeFilter} /> : ""}
         {documents.length ? (
-          <ProjectList projects={documents} />
+          <ProjectList projects={projects} />
         ) : (
           <div className="flex flex-col items-center justify-center gap-5">
             <h2 className="text-2xl md:text-3xl">No projects yet</h2>
