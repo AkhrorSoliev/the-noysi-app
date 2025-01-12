@@ -7,6 +7,7 @@ export const GlobalContext = createContext();
 const initialState = {
   user: null,
   authIsReady: false,
+  messageInputFocus: false,
 };
 
 const themeFromLocalStorage = () => {
@@ -30,6 +31,11 @@ const changeState = (state, action) => {
       return {
         ...state,
         authIsReady: payload,
+      };
+    case "MESSAGE_INPUT_FOCUS":
+      return {
+        ...state,
+        messageInputFocus: payload,
       };
     default:
       return state;

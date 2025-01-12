@@ -20,7 +20,7 @@ export default function Project() {
 
   return (
     <section className="align-elements">
-      <div className="mb-3 flex justify-around text-2xl font-medium md:mb-10 md:text-3xl">
+      <div className="mb-3 hidden justify-around text-2xl font-medium md:mb-10 md:flex md:text-3xl">
         <h2>Project</h2>
         <h2>Discussion</h2>
       </div>
