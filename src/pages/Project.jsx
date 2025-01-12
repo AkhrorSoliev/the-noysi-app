@@ -40,11 +40,11 @@ export default function Project() {
       </div>
       <div className="md:hidden">
         {toggle && <ProjectContent project={document} />}
-        {!toggle && <ProjectChat />}
+        {!toggle && <ProjectChat comments={document.comments} id={id} />}
       </div>
       <div className="hidden justify-between gap-4 md:flex">
         <ProjectContent project={document} />
-        <ProjectChat comments={document.comments} />
+        <ProjectChat comments={document.comments} id={id} />
       </div>
     </section>
   );
