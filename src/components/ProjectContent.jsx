@@ -1,8 +1,31 @@
-import { MdDelete, MdOutlineDoneOutline } from "react-icons/md";
+import {
+  MdDelete,
+  MdOutlineDoneOutline,
+  MdOutlineCancel,
+} from "react-icons/md";
+
+import { useFirestore } from "../hooks/useFirestore";
+import toast from "react-hot-toast";
+
+import { useNavigate } from "react-router-dom";
 
 function ProjectContent({ project }) {
-  console.log(project);
-  const { id, title, description, createdBy, dueDate } = project;
+  const navigate = useNavigate();
+  const { updateDocument, deleteDocument } = useFirestore("projects");
+  const { id, title, description, createdBy, dueDate, completed } = project;
+  console.log(completed);
+  const handleComplete = async (id) => {
+    await updateDocument(id, {
+      completed: !completed,
+    });
+    toast.success("Project status changed");
+  };
+
+  const handleDelete = async (id) => {
+    navigate("/");
+    await deleteDocument(id);
+  };
+
   return (
     <div className="md:w-1/2">
       <h3 className="mb-5 text-center text-2xl font-medium md:hidden">
@@ -27,10 +50,25 @@ function ProjectContent({ project }) {
         <p>{description}</p>
       </div>
       <div className="flex flex-col gap-2 md:flex-row">
-        <button className="btn btn-outline btn-primary btn-sm grow md:w-auto">
-          <MdOutlineDoneOutline /> Completed
+        <button
+          onClick={() => handleComplete(id)}
+          className="btn btn-outline btn-primary btn-sm grow md:w-auto"
+        >
+          {!completed ? (
+            <>
+              <MdOutlineDoneOutline /> Completed
+            </>
+          ) : (
+            <>
+              {" "}
+              <MdOutlineCancel /> Uncompleted
+            </>
+          )}
         </button>
-        <button className="btn btn-outline btn-secondary btn-sm grow md:w-auto">
+        <button
+          onClick={() => handleDelete(id)}
+          className="btn btn-outline btn-secondary btn-sm grow md:w-auto"
+        >
           <MdDelete className="text-xl" /> Delete
         </button>
       </div>
