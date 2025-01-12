@@ -1,13 +1,38 @@
 import { IoSend } from "react-icons/io5";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useGlobalContext } from "../hooks/useGlobalContext";
+import { Timestamp } from "firebase/firestore";
+import { useFirestore } from "../hooks/useFirestore";
 
-function ProjectChat({ comments }) {
-  const { dispatch } = useGlobalContext();
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+function ProjectChat({ id, comments }) {
+  const { dispatch, user } = useGlobalContext();
+  const { updateDocument } = useFirestore("projects");
+  const [errorArea, setErrorArea] = useState(false);
   const textareaRef = useRef();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (textareaRef.current.value.trim() === "") {
+      setErrorArea(true);
+      return;
+    }
+
+    const comment = {
+      content: textareaRef.current.value,
+      createdAt: Timestamp.fromDate(new Date()),
+      createdBy: {
+        displayName: user.displayName,
+        photoURL: user.photoURL,
+        uid: user.uid,
+      },
+    };
+
+    await updateDocument(id, {
+      comments: [...comments, comment],
+    });
+
+    textareaRef.current.value = "";
+  };
 
   const handleFocus = () => {
     dispatch({ type: "MESSAGE_INPUT_FOCUS", payload: true });
@@ -23,22 +48,35 @@ function ProjectChat({ comments }) {
         Discussion
       </h3>
       <div className="max-h-[300px] overflow-y-auto rounded-lg bg-base-200 px-3 py-2 md:max-h-[400px]">
-        <div className="chat chat-start">
-          <div className="avatar chat-image">
-            <div className="w-10 rounded-full">
-              <img
-                alt="Tailwind CSS chat bubble component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-              />
-            </div>
-          </div>
-          <div className="chat-header">
-            Obi-Wan Kenobi
-            <time className="text-xs opacity-50">12:45</time>
-          </div>
-          <div className="chat-bubble">You were the Chosen One!</div>
-        </div>
-        {/* Other chat messages omitted for brevity */}
+        {comments.length ? (
+          <>
+            {comments.map((comment) => {
+              return (
+                <div
+                  className={`chat ${user.uid === comment.createdBy.uid ? "chat-end" : "chat-start"}`}
+                >
+                  <div className="avatar chat-image">
+                    <div className="w-10 rounded-full">
+                      <img
+                        src={comment.createdBy.photoURL}
+                        alt={`${comment.createdBy.displayName} avatar`}
+                      />
+                    </div>
+                  </div>
+                  <div className="chat-header">
+                    {comment.createdBy.displayName}
+                    <time className="ml-1 text-xs italic opacity-50">
+                      {comment.createdAt.toDate().toLocaleString()}
+                    </time>
+                  </div>
+                  <div className="chat-bubble">{comment.content}</div>
+                </div>
+              );
+            })}
+          </>
+        ) : (
+          <p className="text-center">No comments yet</p>
+        )}
       </div>
       <form onSubmit={handleSubmit}>
         <label className="form-control mb-5">
@@ -47,10 +85,17 @@ function ProjectChat({ comments }) {
           </div>
           <textarea
             ref={textareaRef}
-            className="textarea textarea-bordered h-24 leading-normal"
+            className={`textarea textarea-bordered h-24 leading-normal ${
+              errorArea ? "textarea-error" : ""
+            }`}
             placeholder="Type here"
             onFocus={handleFocus}
             onBlur={handleBlur}
+            onChange={(e) => {
+              if (e.target.value.trim().length > 0) {
+                setErrorArea(false);
+              }
+            }}
           ></textarea>
         </label>
         <div className="flex justify-end">
