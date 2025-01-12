@@ -19,11 +19,12 @@ export default function Project() {
   }
 
   return (
-    <div className="align-elements">
-      <h1 className="mb-3 text-2xl font-medium md:mb-10 md:text-3xl">
-        Project
-      </h1>
-      <div className="mb-8 flex items-center gap-2 lg:hidden">
+    <section className="align-elements">
+      <div className="mb-3 flex justify-around text-2xl font-medium md:mb-10 md:text-3xl">
+        <h2>Project</h2>
+        <h2>Discussion</h2>
+      </div>
+      <div className="mb-8 flex items-center gap-2 md:hidden">
         <button
           onClick={() => setToggle(true)}
           className={`btn ${!toggle && "btn-outline"} btn-primary btn-sm grow`}
@@ -37,10 +38,14 @@ export default function Project() {
           <IoChatboxEllipsesOutline className="text-xl" />
         </button>
       </div>
-      <div>
+      <div className="md:hidden">
         {toggle && <ProjectContent project={document} />}
         {!toggle && <ProjectChat />}
       </div>
-    </div>
+      <div className="hidden justify-between gap-4 md:flex">
+        <ProjectContent project={document} />
+        <ProjectChat comments={document.comments} />
+      </div>
+    </section>
   );
 }

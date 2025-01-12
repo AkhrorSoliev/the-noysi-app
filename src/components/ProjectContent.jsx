@@ -4,7 +4,7 @@ function ProjectContent({ project }) {
   console.log(project);
   const { id, title, description, createdBy, dueDate } = project;
   return (
-    <div>
+    <div className="md:w-1/2">
       <div className="mb-5 rounded bg-base-300 p-4">
         <h3 className="mb-2 text-2xl font-bold md:text-3xl">{title}</h3>
         <p className="mb-1 flex items-center gap-1 opacity-80">
@@ -25,11 +25,11 @@ function ProjectContent({ project }) {
         </p>
         <p>{description}</p>
       </div>
-      <div className="flex flex-col gap-2">
-        <button className="btn btn-outline btn-primary btn-sm btn-block">
+      <div className="flex flex-col gap-2 md:flex-row">
+        <button className="btn btn-outline btn-primary btn-sm grow md:w-auto">
           <MdOutlineDoneOutline /> Completed
         </button>
-        <button className="btn btn-outline btn-secondary btn-sm btn-block">
+        <button className="btn btn-outline btn-secondary btn-sm grow md:w-auto">
           <MdDelete className="text-xl" /> Delete
         </button>
       </div>
