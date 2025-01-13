@@ -26,7 +26,7 @@ function Signup() {
 
   useEffect(() => {
     if (data) {
-      signup(data);
+      signup(data.displayName, data.email, data.password);
     }
   }, [data]);
 

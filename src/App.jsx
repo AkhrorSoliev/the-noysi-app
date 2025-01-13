@@ -30,6 +30,7 @@ import { useGlobalContext } from "./hooks/useGlobalContext";
 
 function App() {
   const { user, authIsReady } = useGlobalContext();
+
   const routes = createBrowserRouter([
     {
       path: "/",
