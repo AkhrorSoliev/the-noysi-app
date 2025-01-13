@@ -1,11 +1,34 @@
-import { Form, Link } from "react-router-dom";
+import { Form, Link, useActionData } from "react-router-dom";
 import { FormInput } from "../components";
-import SignupBg from "../assets/signup-bg.jpg";
-import Logo from "../assets/noysi.svg";
 import { useAuthWithGoogle } from "../hooks/useAuthWithGoogle";
 
+import SignupBg from "../assets/signup-bg.jpg";
+import Logo from "../assets/noysi.svg";
+import { useEffect } from "react";
+import { useSingup } from "../hooks/useSingup";
+
+export const action = async ({ request }) => {
+  const formData = await request.formData();
+  const displayName = formData.get("displayName");
+  const email = formData.get("email");
+  const password = formData.get("password");
+  return {
+    displayName,
+    email,
+    password,
+  };
+};
+
 function Signup() {
+  const data = useActionData();
+  const { signup, isPending: _isPending } = useSingup();
   const { authenticateWithGoogle, isPending } = useAuthWithGoogle();
+
+  useEffect(() => {
+    if (data) {
+      signup(data);
+    }
+  }, [data]);
 
   return (
     <section
@@ -41,8 +64,11 @@ function Signup() {
             size="input-sm md:input-md"
           />
           <div className="mt-5 flex flex-col gap-2 md:flex-row">
-            <button className="btn btn-primary btn-sm grow md:btn-md">
-              Signup
+            <button
+              disabled={isPending}
+              className="btn btn-primary btn-sm grow md:btn-md"
+            >
+              {isPending ? "Loading..." : "Login"}
             </button>
             <button
               type="button"
@@ -50,7 +76,7 @@ function Signup() {
               disabled={isPending}
               className="btn btn-secondary btn-sm grow md:btn-md disabled:bg-slate-400"
             >
-              {isPending ? "Loading..." : "Google"}
+              {_isPending ? "Loading..." : "Google"}
             </button>
           </div>
         </Form>

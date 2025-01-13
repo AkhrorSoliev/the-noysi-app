@@ -22,6 +22,9 @@ import {
   Project,
 } from "./pages";
 
+// actions
+import { action as signupAction } from "./pages/Signup";
+
 // context
 import { useGlobalContext } from "./hooks/useGlobalContext";
 
@@ -65,6 +68,7 @@ function App() {
     {
       path: "/signup",
       element: user ? <Navigate to="/" /> : <Signup />,
+      action: signupAction,
     },
     {
       path: "/login",
