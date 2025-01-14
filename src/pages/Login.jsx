@@ -1,11 +1,29 @@
-import { Form, Link } from "react-router-dom";
+import { Form, Link, useActionData } from "react-router-dom";
 import { FormInput } from "../components";
+import { useAuthWithGoogle } from "../hooks/useAuthWithGoogle";
+import { useLogin } from "../hooks/useLogin";
 import LoginBg from "../assets/login-bg.jpg";
 import Logo from "../assets/noysi.svg";
-import { useAuthWithGoogle } from "../hooks/useAuthWithGoogle";
+import { useEffect } from "react";
+
+export const action = async ({ request }) => {
+  const formData = await request.formData();
+  const email = formData.get("email");
+  const password = formData.get("password");
+  return { email, password };
+};
 
 function Login() {
+  const data = useActionData();
+  const { login, _isPending } = useLogin();
   const { authenticateWithGoogle, isPending } = useAuthWithGoogle();
+
+  useEffect(() => {
+    if (data) {
+      login(data.email, data.password);
+    }
+  }, [data]);
+
   return (
     <section
       className="grid h-screen w-full place-items-center bg-cover bg-center bg-no-repeat"
@@ -34,8 +52,11 @@ function Login() {
             size="input-sm md:input-md"
           />
           <div className="mt-5 flex flex-col gap-2 md:flex-row">
-            <button className="btn btn-primary btn-sm grow md:btn-md">
-              Login
+            <button
+              disabled={isPending}
+              className="btn btn-primary btn-sm grow md:btn-md"
+            >
+              {_isPending ? "Loading..." : "Login"}
             </button>
             <button
               type="button"
