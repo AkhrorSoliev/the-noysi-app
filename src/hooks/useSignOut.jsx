@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 export function useSignOut() {
   const { updateDocument } = useFirestore("users");
   const { dispatch, user } = useGlobalContext();
+
   const signout = async () => {
     dispatch({ type: "AUTH_IS_READY", payload: false });
     try {

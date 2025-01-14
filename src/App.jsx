@@ -24,6 +24,7 @@ import {
 
 // actions
 import { action as signupAction } from "./pages/Signup";
+import { action as loginAction } from "./pages/Login";
 
 // context
 import { useGlobalContext } from "./hooks/useGlobalContext";
@@ -74,6 +75,7 @@ function App() {
     {
       path: "/login",
       element: user ? <Navigate to="/" /> : <Login />,
+      action: loginAction,
     },
   ]);
 
