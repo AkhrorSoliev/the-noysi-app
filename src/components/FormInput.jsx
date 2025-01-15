@@ -7,7 +7,7 @@ function FormInput({ type, label, size, name, errorText }) {
       <input
         type={type}
         placeholder="Type here"
-        className={`input input-bordered w-full ${size}`}
+        className={`a input input-bordered w-full ${size}`}
         name={name}
         required
       />
