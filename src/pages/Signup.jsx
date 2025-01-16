@@ -1,11 +1,11 @@
 import { Form, Link, useActionData } from "react-router-dom";
 import { FormInput } from "../components";
 import { useAuthWithGoogle } from "../hooks/useAuthWithGoogle";
+import { useSingup } from "../hooks/useSingup";
+import { useEffect } from "react";
 
 import SignupBg from "../assets/signup-bg.jpg";
 import Logo from "../assets/noysi.svg";
-import { useEffect } from "react";
-import { useSingup } from "../hooks/useSingup";
 
 export const action = async ({ request }) => {
   const formData = await request.formData();
@@ -76,7 +76,7 @@ function Signup() {
               disabled={isPending}
               className="btn btn-secondary btn-sm grow md:btn-md disabled:bg-slate-400"
             >
-              {_isPending ? "Loading..." : "Google"}
+              {isPending ? "Loading..." : "Google"}
             </button>
           </div>
         </Form>

@@ -179,19 +179,8 @@ function Create() {
               />
             </label>
           </div>
-          <div className="form-control md:col-start-2 md:col-end-3 md:items-center">
-            <label className="label cursor-pointer md:justify-start md:gap-4">
-              <span className="label-text">
-                Read comments on this project to all users:
-              </span>
-              <input
-                onChange={() => setOnlyReadComments(!onlyReadComments)}
-                checked={onlyReadComments}
-                type="checkbox"
-                className="checkbox"
-              />
-            </label>
-          </div>
+          {/* FORM PRACTISE */}
+          {/* <div className="form-control md:col-start-2 md:col-end-3 md:items-center"></div> */}
           <div className="create-btn">
             <button className="btn btn-primary btn-sm w-full md:btn-md lg:btn-lg md:max-w-96">
               Submit
