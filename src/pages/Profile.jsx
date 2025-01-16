@@ -8,8 +8,10 @@ import {
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useUpdateProfile } from "../hooks/useUpdateProfile";
+import { useEmailVerification } from "../hooks/useEmailVerification";
 
 function Profile() {
+  const { _isPending, sendVerification } = useEmailVerification();
   const { user } = useGlobalContext();
   const { document } = useDocument("users", user.uid);
   const [displayName, setDisplayName] = useState("");
@@ -150,7 +152,17 @@ function Profile() {
                 Email:
                 <span className="font-semibold">{document.email}</span>
                 {!document.emailVerified ? (
-                  <MdOutlineWarning className="text-xl" />
+                  <div className="flex items-center">
+                    <MdOutlineWarning className="text-xl" />
+                    <button
+                      onClick={sendVerification}
+                      disabled={_isPending}
+                      type="button"
+                      className="btn btn-outline btn-error btn-sm ml-1"
+                    >
+                      {_isPending ? "Sending..." : "Send"}
+                    </button>
+                  </div>
                 ) : (
                   <MdDoneOutline className="text-xl" />
                 )}

@@ -2,9 +2,9 @@ import { Form, Link, useActionData } from "react-router-dom";
 import { FormInput } from "../components";
 import { useAuthWithGoogle } from "../hooks/useAuthWithGoogle";
 import { useLogin } from "../hooks/useLogin";
+import { useEffect } from "react";
 import LoginBg from "../assets/login-bg.jpg";
 import Logo from "../assets/noysi.svg";
-import { useEffect } from "react";
 
 export const action = async ({ request }) => {
   const formData = await request.formData();
