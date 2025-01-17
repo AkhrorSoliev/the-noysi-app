@@ -1,10 +1,10 @@
-import { useGlobalContext } from "../hooks/useGlobalContext";
-import { useDocument } from "../hooks/useDocument";
 import {
   MdOutlineWarning,
   MdDoneOutline,
   MdOutlinePhotoCamera,
 } from "react-icons/md";
+import { useGlobalContext } from "../hooks/useGlobalContext";
+import { useDocument } from "../hooks/useDocument";
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useUpdateProfile } from "../hooks/useUpdateProfile";
@@ -73,7 +73,6 @@ function Profile() {
   if (!document) {
     return <div className="loading">Loading...</div>;
   }
-
   return (
     <section>
       <div className="align-elements">
@@ -151,7 +150,7 @@ function Profile() {
               <p className="flex items-center gap-2">
                 Email:
                 <span className="font-semibold">{document.email}</span>
-                {!document.emailVerified ? (
+                {!user.emailVerified ? (
                   <div className="flex items-center">
                     <MdOutlineWarning className="text-xl" />
                     <button
