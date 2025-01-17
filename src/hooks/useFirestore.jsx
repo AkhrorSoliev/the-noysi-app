@@ -136,7 +136,6 @@ export function useFirestore(collectionName) {
     const user = {
       displayName: userDocument.displayName,
       email: userDocument.email,
-      emailVerified: userDocument.emailVerified,
       phoneNumber: userDocument.phoneNumber || false,
       createdAt: userDocument.metadata.creationTime,
       photoURL:
