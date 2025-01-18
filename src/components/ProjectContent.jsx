@@ -7,9 +7,11 @@ import { Modal } from "./";
 
 import { useFirestore } from "../hooks/useFirestore";
 import toast from "react-hot-toast";
+import { useGlobalContext } from "../hooks/useGlobalContext";
 
 function ProjectContent({ project }) {
   const { updateDocument } = useFirestore("projects");
+  const { user } = useGlobalContext();
   const { id, title, description, createdBy, dueDate, completed } = project;
 
   const handleComplete = async (id) => {
@@ -44,30 +46,32 @@ function ProjectContent({ project }) {
           </p>
           <p>{description}</p>
         </div>
-        <div className="flex flex-col gap-2 md:flex-row">
-          <button
-            onClick={() => handleComplete(id)}
-            className="btn btn-outline btn-primary btn-sm grow md:w-auto"
-          >
-            {!completed ? (
-              <>
-                <MdOutlineDoneOutline /> Completed
-              </>
-            ) : (
-              <>
-                {" "}
-                <MdOutlineCancel /> Uncompleted
-              </>
-            )}
-          </button>
-          <button
-            onClick={() => document.getElementById("my_modal_1").showModal()}
-            className="btn btn-outline btn-secondary btn-sm grow md:w-auto"
-          >
-            <MdDelete className="text-xl" />
-            Delete
-          </button>
-        </div>
+        {user.uid === createdBy.id && (
+          <div className="flex flex-col gap-2 md:flex-row">
+            <button
+              onClick={() => handleComplete(id)}
+              className="btn btn-outline btn-primary btn-sm grow md:w-auto"
+            >
+              {!completed ? (
+                <>
+                  <MdOutlineDoneOutline /> Completed
+                </>
+              ) : (
+                <>
+                  {" "}
+                  <MdOutlineCancel /> Uncompleted
+                </>
+              )}
+            </button>
+            <button
+              onClick={() => document.getElementById("my_modal_1").showModal()}
+              className="btn btn-outline btn-secondary btn-sm grow md:w-auto"
+            >
+              <MdDelete className="text-xl" />
+              Delete
+            </button>
+          </div>
+        )}
       </div>
     </>
   );
