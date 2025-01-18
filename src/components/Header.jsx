@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { useDocument } from "../hooks/useDocument";
 import Logo from "../assets/noysi.svg";
 import { useThemeToggler } from "../hooks/useThemeToggler";
+import { FaRegMoon, FaRegSun } from "react-icons/fa";
 
 const themeFromLocalStorage = () => {
   return localStorage.getItem("theme") || "light";
@@ -74,6 +75,18 @@ function Header() {
           </li>
         </ul>
       </div>
+      {/* this hidden checkbox controls the state */}
+      <label className="swap swap-rotate ml-auto mr-3 hidden md:flex lg:hidden">
+        <input
+          onChange={changeTheme}
+          type="checkbox"
+          value="synthwave"
+          checked={theme == "dracula"}
+          className="theme-controller"
+        />
+        <FaRegSun className="swap-on h-5 w-5 fill-current" />
+        <FaRegMoon className="swap-off h-5 w-5 fill-current" />
+      </label>
       <button
         className="btn btn-sm border-0 bg-transparent md:btn-md"
         onClick={signout}
