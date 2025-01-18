@@ -9,7 +9,7 @@ import { useFirestore } from "../hooks/useFirestore";
 import toast from "react-hot-toast";
 
 function ProjectContent({ project }) {
-  const { updateDocument, deleteDocument } = useFirestore("projects");
+  const { updateDocument } = useFirestore("projects");
   const { id, title, description, createdBy, dueDate, completed } = project;
 
   const handleComplete = async (id) => {
@@ -21,7 +21,7 @@ function ProjectContent({ project }) {
 
   return (
     <>
-      <Modal />
+      <Modal title={title} />
       <div className="md:w-1/2">
         <h3 className="mb-5 text-center text-2xl font-medium md:hidden">
           Project

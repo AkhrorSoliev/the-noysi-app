@@ -14,18 +14,21 @@ function Modal() {
   return (
     <dialog id="my_modal_1" className="modal">
       <div className="modal-box">
-        <h3 className="text-lg font-bold">Hello!</h3>
-        <p className="py-4">Press ESC key or click the button below to close</p>
+        <p className="text-md py-4 text-center font-semibold md:text-2xl">
+          Are you sure you want to delete this project?
+        </p>
         <div className="modal-action">
           <form method="dialog">
-            <button
-              onClick={() => handleDelete(id)}
-              type="button"
-              className="btn btn-error btn-sm md:btn-md"
-            >
-              Delete
-            </button>
-            <button className="btn btn-sm md:btn-md">Close</button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => handleDelete(id)}
+                type="button"
+                className="btn btn-error btn-sm md:btn-md"
+              >
+                Delete
+              </button>
+              <button className="btn btn-sm md:btn-md">Close</button>
+            </div>
           </form>
         </div>
       </div>
