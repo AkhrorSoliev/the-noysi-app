@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { GoProjectRoadmap } from "react-icons/go";
 import { IoChatboxEllipsesOutline } from "react-icons/io5";
-import { ProjectChat, ProjectContent } from "../components";
+import { Modal, ProjectChat, ProjectContent } from "../components";
 import { useDocument } from "../hooks/useDocument";
 import ConfettiExplosion from "react-confetti-explosion";
 
@@ -21,6 +21,7 @@ export default function Project() {
 
   return (
     <>
+      <Modal />
       {document.completed && <ConfettiExplosion />}
       <section className="align-elements">
         <div className="mb-3 hidden justify-around text-2xl font-medium md:mb-10 md:flex md:text-3xl">
