@@ -4,8 +4,9 @@ import { useGlobalContext } from "../hooks/useGlobalContext";
 import { Timestamp } from "firebase/firestore";
 import { useFirestore } from "../hooks/useFirestore";
 import { v4 as uuidv4 } from "uuid";
+import { MdOutlineWarning } from "react-icons/md";
 
-function ProjectChat({ id, comments }) {
+function ProjectChat({ id, comments, commentAccess }) {
   const { dispatch, user } = useGlobalContext();
   const { updateDocument } = useFirestore("projects");
   const [errorArea, setErrorArea] = useState(false);
@@ -59,6 +60,17 @@ function ProjectChat({ id, comments }) {
   useEffect(() => {
     scrollToBottom();
   }, [comments]);
+
+  if (!commentAccess) {
+    return (
+      <div className="grid max-h-[300px] place-items-center bg-base-200 px-3 py-2 text-center md:max-h-[400px] md:w-1/2">
+        <h3 className="flex items-center gap-3 text-xl font-medium">
+          <span>Only assigned users can comment on this project.</span>
+          <MdOutlineWarning className="text-2xl" />
+        </h3>
+      </div>
+    );
+  }
 
   return (
     <div className="md:w-1/2">

@@ -10,6 +10,7 @@ export default function Project() {
   const { id } = useParams();
   const [toggle, setToggle] = useState(true);
   const { document } = useDocument("projects", id);
+  console.log(document);
 
   if (!document) {
     return (
@@ -44,11 +45,21 @@ export default function Project() {
         </div>
         <div className="md:hidden">
           {toggle && <ProjectContent project={document} />}
-          {!toggle && <ProjectChat comments={document.comments} id={id} />}
+          {!toggle && (
+            <ProjectChat
+              id={id}
+              comments={document.comments}
+              commentAccess={document.commentsAccessOnlyAssignedUsers}
+            />
+          )}
         </div>
         <div className="hidden justify-between gap-4 md:flex">
           <ProjectContent project={document} />
-          <ProjectChat comments={document.comments} id={id} />
+          <ProjectChat
+            id={id}
+            comments={document.comments}
+            commentAccess={document.commentsAccessOnlyAssignedUsers}
+          />
         </div>
       </section>
     </>
