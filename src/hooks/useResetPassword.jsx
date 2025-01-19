@@ -7,7 +7,7 @@ export function useResetPassword() {
   const resetPassword = async (email) => {
     try {
       await sendPasswordResetEmail(auth, email, {
-        url: "http://localhost:5173/login",
+        url: "https://nnoysi.vercel.app/login",
       });
       toast.success("Check your email for reset password link");
     } catch (error) {
