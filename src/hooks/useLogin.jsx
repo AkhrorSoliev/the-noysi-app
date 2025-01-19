@@ -9,6 +9,7 @@ import { useFirestore } from "../hooks/useFirestore";
 export function useLogin() {
   const { updateDocument } = useFirestore("users");
   const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState(null);
   const { dispatch } = useGlobalContext();
 
   const login = async (email, password) => {
@@ -25,12 +26,14 @@ export function useLogin() {
       console.log(err.message);
       console.log(err.code);
       checkerrorCode(err.code);
+      setError(err.message);
     } finally {
       setIsPending(false);
     }
   };
   return {
     login,
+    error,
     isPending,
   };
 }
