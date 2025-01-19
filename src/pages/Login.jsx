@@ -5,6 +5,7 @@ import { useLogin } from "../hooks/useLogin";
 import { useEffect } from "react";
 import LoginBg from "../assets/login-bg.jpg";
 import Logo from "../assets/noysi.svg";
+import { useResetPassword } from "../hooks/useResetPassword";
 
 export const action = async ({ request }) => {
   const formData = await request.formData();
@@ -15,7 +16,8 @@ export const action = async ({ request }) => {
 
 function Login() {
   const data = useActionData();
-  const { login, _isPending } = useLogin();
+  const { resetPassword } = useResetPassword();
+  const { login, _isPending, error } = useLogin();
   const { authenticateWithGoogle, isPending } = useAuthWithGoogle();
 
   useEffect(() => {
@@ -23,6 +25,12 @@ function Login() {
       login(data.email, data.password);
     }
   }, [data]);
+
+  const handleResetPassword = () => {
+    if (data) {
+      resetPassword(data.email);
+    }
+  };
 
   return (
     <section
@@ -51,6 +59,13 @@ function Login() {
             name="password"
             size="input-sm md:input-md"
           />
+          {error && (
+            <p className="mt-2 text-sm text-red-500">
+              <button onClick={handleResetPassword} type="button">
+                Forget password ?
+              </button>
+            </p>
+          )}
           <div className="mt-5 flex flex-col gap-2 md:flex-row">
             <button
               disabled={isPending}
