@@ -11,7 +11,7 @@ export function useEmailVerification() {
     setIsPending(true);
     try {
       await sendEmailVerification(auth.currentUser, {
-        url: "http://localhost:5173/profile",
+        url: "https://nnoysi.vercel.app/login",
       });
       toast.success("Verification email sent");
       toast("Please check your email and verify your account");
